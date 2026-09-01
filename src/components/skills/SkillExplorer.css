@@ -6,18 +6,94 @@
   max-width: 1040px;
   margin: 0 auto;
   box-sizing: border-box;
+
+  /* Default theme fallback (Frontend emerald) */
+  --cat-accent: #10b981;
+  --cat-light: #6ee7b7;
+  --cat-sub: #34d399;
+  --cat-glow: rgba(16, 185, 129, 0.18);
+  --cat-border: rgba(16, 185, 129, 0.35);
+  --cat-bg-glow: rgba(16, 185, 129, 0.08);
 }
 
-/* Category Filter Tabs */
+/* =========================================================================
+   DOMAIN ACCENT COLOR SYSTEMS
+   ========================================================================= */
+
+/* Frontend: Emerald / Green */
+.skill-group-card[data-category="frontend"],
+.skill-inspector-panel[data-category="frontend"],
+.skill-node-btn[data-category="frontend"] {
+  --cat-accent: #10b981;
+  --cat-light: #6ee7b7;
+  --cat-sub: #34d399;
+  --cat-glow: rgba(16, 185, 129, 0.22);
+  --cat-border: rgba(16, 185, 129, 0.35);
+  --cat-bg-glow: rgba(16, 185, 129, 0.08);
+}
+
+/* Backend: Blue */
+.skill-group-card[data-category="backend"],
+.skill-inspector-panel[data-category="backend"],
+.skill-node-btn[data-category="backend"] {
+  --cat-accent: #3b82f6;
+  --cat-light: #93c5fd;
+  --cat-sub: #60a5fa;
+  --cat-glow: rgba(59, 130, 246, 0.22);
+  --cat-border: rgba(59, 130, 246, 0.35);
+  --cat-bg-glow: rgba(59, 130, 246, 0.08);
+}
+
+/* Database & Cloud: Violet */
+.skill-group-card[data-category="database"],
+.skill-inspector-panel[data-category="database"],
+.skill-node-btn[data-category="database"] {
+  --cat-accent: #8b5cf6;
+  --cat-light: #c4b5fd;
+  --cat-sub: #a78bfa;
+  --cat-glow: rgba(139, 92, 246, 0.22);
+  --cat-border: rgba(139, 92, 246, 0.35);
+  --cat-bg-glow: rgba(139, 92, 246, 0.08);
+}
+
+/* Ingestion & Analytics: Amber */
+.skill-group-card[data-category="ingestion"],
+.skill-inspector-panel[data-category="ingestion"],
+.skill-node-btn[data-category="ingestion"] {
+  --cat-accent: #f59e0b;
+  --cat-light: #fcd34d;
+  --cat-sub: #fbbf24;
+  --cat-glow: rgba(245, 158, 11, 0.22);
+  --cat-border: rgba(245, 158, 11, 0.35);
+  --cat-bg-glow: rgba(245, 158, 11, 0.08);
+}
+
+/* Tools & Engineering: Cyan / Neutral */
+.skill-group-card[data-category="tools"],
+.skill-inspector-panel[data-category="tools"],
+.skill-node-btn[data-category="tools"] {
+  --cat-accent: #06b6d4;
+  --cat-light: #67e8f9;
+  --cat-sub: #22d3ee;
+  --cat-glow: rgba(6, 182, 212, 0.22);
+  --cat-border: rgba(6, 182, 212, 0.35);
+  --cat-bg-glow: rgba(6, 182, 212, 0.08);
+}
+
+/* =========================================================================
+   CATEGORY FILTER TABS
+   ========================================================================= */
 .skill-category-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 8px;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 9999px;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   width: fit-content;
   max-width: 100%;
   margin: 0 auto;
@@ -27,9 +103,9 @@
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: 9999px;
   background: transparent;
   border: 1px solid transparent;
@@ -45,18 +121,55 @@
 }
 
 .category-tab-btn:focus-visible {
-  outline: 2px solid #34d399;
+  outline: 2px solid var(--accent-primary, #34d399);
   outline-offset: 2px;
 }
 
 .category-tab-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+}
+
+.category-tab-btn[data-category="frontend"].active {
   background: rgba(16, 185, 129, 0.15);
   border-color: rgba(16, 185, 129, 0.4);
   color: #6ee7b7;
   box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
 }
 
-/* Skill Groups Grid */
+.category-tab-btn[data-category="backend"].active {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #93c5fd;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+}
+
+.category-tab-btn[data-category="database"].active {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.4);
+  color: #c4b5fd;
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+}
+
+.category-tab-btn[data-category="ingestion"].active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.2);
+}
+
+.category-tab-btn[data-category="tools"].active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: #67e8f9;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.2);
+}
+
+/* =========================================================================
+   SKILL GROUPS GRID & CARDS
+   ========================================================================= */
 .skill-groups-grid {
   display: flex;
   flex-direction: column;
@@ -67,8 +180,8 @@
   position: relative;
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(16, 185, 129, 0.04) 0%,
-    rgba(14, 18, 28, 0.75) 100%
+    var(--cat-bg-glow) 0%,
+    rgba(14, 18, 28, 0.8) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
@@ -80,11 +193,11 @@
     0 20px 48px -12px rgba(0, 0, 0, 0.65),
     0 0 0 1px rgba(255, 255, 255, 0.04),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
-  transition: border-color var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .skill-group-card:hover {
-  border-color: rgba(16, 185, 129, 0.25);
+  border-color: var(--cat-border);
 }
 
 .skill-group-header {
@@ -107,7 +220,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #34d399;
+  color: var(--cat-sub);
 }
 
 .skill-group-desc {
@@ -118,7 +231,9 @@
   line-height: 1.5;
 }
 
-/* Constellation Nodes Grid */
+/* =========================================================================
+   CONSTELLATION NODES CLUSTER
+   ========================================================================= */
 .skill-nodes-cluster {
   display: flex;
   flex-wrap: wrap;
@@ -141,6 +256,7 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition:
     transform var(--duration-fast) var(--ease-spring),
     border-color var(--duration-fast) var(--ease-smooth),
@@ -150,22 +266,22 @@
 
 .skill-node-btn:hover {
   transform: translateY(-2px);
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
+  background: var(--cat-bg-glow);
+  border-color: var(--cat-border);
+  box-shadow: 0 6px 20px var(--cat-glow);
 }
 
 .skill-node-btn:focus-visible {
-  outline: 2px solid #6ee7b7;
+  outline: 2px solid var(--cat-light);
   outline-offset: 3px;
-  border-color: #10b981;
+  border-color: var(--cat-accent);
 }
 
 .skill-node-btn.active {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: #10b981;
+  background: var(--cat-bg-glow);
+  border-color: var(--cat-accent);
   color: #f8fafc;
-  box-shadow: 0 0 24px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 24px var(--cat-glow);
   transform: scale(1.03);
 }
 
@@ -173,8 +289,13 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  background: var(--cat-accent);
+  box-shadow: 0 0 8px var(--cat-accent);
+  flex-shrink: 0;
+}
+
+.skill-node-name {
+  white-space: nowrap;
 }
 
 .skill-project-count-tag {
@@ -186,23 +307,26 @@
   color: #94a3b8;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-/* ================= SKILL INSPECTOR PANEL ================= */
+/* =========================================================================
+   SKILL INSPECTOR PANEL
+   ========================================================================= */
 .skill-inspector-panel {
   position: relative;
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(16, 185, 129, 0.1) 0%,
+    var(--cat-glow) 0%,
     rgba(12, 16, 26, 0.95) 100%
   );
-  border: 1px solid rgba(16, 185, 129, 0.35);
+  border: 1px solid var(--cat-border);
   border-radius: 22px;
   padding: 36px 32px;
   box-sizing: border-box;
   box-shadow:
     0 24px 60px -12px rgba(0, 0, 0, 0.8),
-    0 0 32px rgba(16, 185, 129, 0.18),
+    0 0 32px var(--cat-glow),
     inset 0 1px 1px rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
@@ -238,11 +362,11 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 9999px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #6ee7b7;
+  background: var(--cat-bg-glow);
+  border: 1px solid var(--cat-border);
+  color: var(--cat-light);
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
@@ -255,7 +379,7 @@
 .inspector-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(26px, 4vw, 36px);
+  font-size: clamp(24px, 4vw, 34px);
   font-weight: 800;
   color: var(--color-text-primary);
   letter-spacing: 0.02em;
@@ -266,8 +390,8 @@
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
-  color: #34d399;
-  letter-spacing: 0.06em;
+  color: var(--cat-sub);
+  letter-spacing: 0.04em;
 }
 
 .inspector-close-btn {
@@ -284,6 +408,7 @@
   cursor: pointer;
   outline: none;
   transition: all var(--duration-fast) ease;
+  flex-shrink: 0;
 }
 
 .inspector-close-btn:hover {
@@ -293,7 +418,7 @@
 }
 
 .inspector-close-btn:focus-visible {
-  outline: 2px solid #6ee7b7;
+  outline: 2px solid var(--cat-light);
   outline-offset: 2px;
 }
 
@@ -305,7 +430,9 @@
   color: var(--color-text-secondary);
 }
 
-/* Verified Projects Section */
+/* =========================================================================
+   VERIFIED PROJECTS SECTION
+   ========================================================================= */
 .inspector-projects-section {
   display: flex;
   flex-direction: column;
@@ -323,7 +450,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6ee7b7;
+  color: var(--cat-light);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -383,16 +510,27 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: #10b981;
+  color: var(--cat-accent);
   font-family: var(--font-mono);
   font-size: 12px;
 }
 
-/* Related Concepts */
+/* =========================================================================
+   RELATED CONCEPTS & TOOLS
+   ========================================================================= */
 .inspector-concepts-section {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.inspector-concepts-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cat-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 .inspector-concepts-list {
@@ -411,19 +549,55 @@
   color: #cbd5e1;
 }
 
-/* Responsive adjustments */
+/* =========================================================================
+   REDUCED MOTION SUPPORT
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .skill-inspector-panel {
+    animation: none;
+  }
+
+  .skill-node-btn {
+    transition: none;
+  }
+
+  .skill-node-btn:hover,
+  .skill-node-btn.active {
+    transform: none;
+  }
+
+  .category-tab-btn {
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   RESPONSIVE LAYOUTS
+   ========================================================================= */
 @media (max-width: 768px) {
+  .skill-explorer-container {
+    gap: 24px;
+  }
+
   .skill-category-tabs {
     border-radius: 16px;
     justify-content: center;
+    width: 100%;
+  }
+
+  .category-tab-btn {
+    padding: 6px 12px;
+    font-size: 10px;
   }
 
   .skill-group-card {
     padding: 24px 18px;
+    border-radius: 18px;
   }
 
   .skill-inspector-panel {
     padding: 24px 18px;
+    border-radius: 18px;
   }
 
   .inspector-projects-section {
@@ -431,7 +605,29 @@
   }
 
   .skill-node-btn {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-nodes-cluster {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-node-btn {
     width: 100%;
     justify-content: space-between;
   }
+
+  .inspector-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .inspector-close-btn {
+    align-self: flex-end;
+  }
 }
+

@@ -21,6 +21,7 @@ export interface SkillDetail {
 export interface SkillCategoryGroup {
   id: SkillCategory
   title: string
+  shortTitle?: string
   subtitle: string
   description: string
   skillIds: string[]
