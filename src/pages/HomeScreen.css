@@ -1,0 +1,106 @@
+.home-screen-viewport {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  user-select: none;
+}
+
+/* Subtle corner interface details (enhances modern studio feel) */
+.home-screen-header {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: var(--z-ui);
+  pointer-events: none;
+}
+
+.home-brand-logo {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-text-primary);
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+.home-sys-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.home-screen-footer {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: var(--z-ui);
+  pointer-events: none;
+}
+
+.home-footer-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.home-coord-indicator {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--color-text-dim);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-screen-viewport {
+    height: auto;
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding-top: 16px;
+  }
+
+  .home-screen-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    padding: 12px 20px 0;
+    box-sizing: border-box;
+  }
+
+  .home-screen-footer {
+    display: none;
+  }
+}

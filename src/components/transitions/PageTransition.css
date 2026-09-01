@@ -1,0 +1,118 @@
+.page-transition-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+/* Page Layer Base */
+.page-layer {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  will-change: transform, opacity, filter;
+  transition:
+    opacity var(--duration-normal) var(--ease-smooth),
+    transform var(--duration-normal) var(--ease-smooth),
+    filter var(--duration-normal) var(--ease-smooth);
+}
+
+/* HOME LAYER STATES */
+.page-layer.home-idle {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+  pointer-events: auto;
+}
+
+.page-layer.home-bursting {
+  opacity: 0.15;
+  transform: scale(0.96);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.page-layer.home-hidden {
+  display: none;
+}
+
+.page-layer.home-reconstructing {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+  animation: homeReconstruct 340ms var(--ease-spring) forwards;
+}
+
+/* SECTION LAYER STATES */
+.page-layer.section-entering {
+  opacity: 0;
+  transform: scale(0.94) translateY(28px);
+  filter: blur(4px);
+  animation: sectionEnter 360ms var(--ease-spring) forwards;
+}
+
+.page-layer.section-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0px);
+  pointer-events: auto;
+}
+
+.page-layer.section-exiting {
+  opacity: 0;
+  transform: scale(0.95) translateY(24px);
+  filter: blur(4px);
+  pointer-events: none;
+  animation: sectionExit 300ms var(--ease-smooth) forwards;
+}
+
+@keyframes sectionEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(28px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes sectionExit {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(24px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes homeReconstruct {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-layer,
+  .page-layer.home-reconstructing,
+  .page-layer.section-entering,
+  .page-layer.section-exiting {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+    transition: opacity 150ms ease !important;
+  }
+}

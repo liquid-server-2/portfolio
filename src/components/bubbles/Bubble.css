@@ -1,0 +1,298 @@
+.bubble-positioner {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-bubbles);
+  transition: z-index 0s, transform var(--duration-normal) var(--ease-smooth);
+}
+
+.bubble-positioner:has(:hover),
+.bubble-positioner:has(:focus-visible) {
+  z-index: var(--z-bubbles-hover);
+}
+
+.bubble-float-wrapper {
+  animation: dynamicFloat var(--float-duration, 7s) ease-in-out infinite alternate;
+  animation-delay: var(--float-delay, 0s);
+  will-change: transform;
+}
+
+.bubble-card {
+  position: relative;
+  width: var(--bubble-size, 136px);
+  height: var(--bubble-size, 136px);
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid var(--glass-border);
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(10, 14, 22, 0.7) 100%
+  );
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow:
+    0 12px 30px -4px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 20px 0 var(--accent-glow-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-primary);
+  animation: bubbleInitialReveal 480ms var(--ease-spring) both;
+  animation-delay: calc(var(--mobile-order, 1) * 35ms);
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    border-color var(--duration-normal) var(--ease-smooth),
+    box-shadow var(--duration-normal) var(--ease-smooth),
+    background var(--duration-normal) var(--ease-smooth);
+  user-select: none;
+  overflow: hidden;
+}
+
+@keyframes bubbleInitialReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Glass Specular Reflection Highlight */
+.bubble-card::before {
+  content: '';
+  position: absolute;
+  top: 4%;
+  left: 12%;
+  width: 76%;
+  height: 44%;
+  border-radius: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  filter: blur(1px);
+  transition: opacity var(--duration-normal) ease;
+}
+
+/* Outer Accent Ambient Aura */
+.bubble-ambient-aura {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+  z-index: -1;
+}
+
+/* Bubble Inner Content */
+.bubble-inner-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.bubble-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-primary);
+  opacity: 0.85;
+  margin-bottom: 2px;
+  transition: transform var(--duration-fast) ease, opacity var(--duration-fast) ease;
+}
+
+.bubble-icon-wrapper {
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    color var(--duration-normal) var(--ease-smooth),
+    filter var(--duration-normal) var(--ease-smooth);
+}
+
+.bubble-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.15;
+  transition: transform var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.bubble-subtitle {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  opacity: 0.9;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity var(--duration-fast) ease;
+}
+
+/* Revealable "OPEN" Action Pill */
+.bubble-open-hint {
+  position: absolute;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: var(--accent-primary);
+  color: #05070a;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px var(--accent-glow);
+  opacity: 0;
+  transform: translateY(8px) scale(0.85);
+  pointer-events: none;
+  transition:
+    opacity var(--duration-fast) var(--ease-smooth),
+    transform var(--duration-fast) var(--ease-spring);
+  z-index: 3;
+}
+
+.bubble-open-arrow {
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* ================= HOVER & FOCUS STATES ================= */
+
+.bubble-card:hover {
+  transform: scale(1.08) translateY(-3px);
+  border-color: var(--accent-border);
+  background: radial-gradient(
+    circle at 40% 30%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 55%,
+    rgba(14, 18, 28, 0.85) 100%
+  );
+  box-shadow:
+    0 18px 36px -6px rgba(0, 0, 0, 0.65),
+    0 0 28px -2px var(--accent-glow),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 0 24px 0 var(--accent-glow);
+}
+
+.bubble-card:hover .bubble-ambient-aura,
+.bubble-card:focus-visible .bubble-ambient-aura {
+  opacity: 1;
+}
+
+.bubble-card:hover .bubble-icon-wrapper,
+.bubble-card:focus-visible .bubble-icon-wrapper {
+  color: var(--accent-highlight);
+  transform: scale(1.14) translateY(-2px);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.bubble-card:hover .bubble-tag,
+.bubble-card:focus-visible .bubble-tag {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.bubble-card:hover .bubble-subtitle,
+.bubble-card:focus-visible .bubble-subtitle {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.bubble-card:hover .bubble-open-hint,
+.bubble-card:focus-visible .bubble-open-hint {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Keyboard Accessible Focus Visible */
+.bubble-card:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: 4px;
+  transform: scale(1.08) translateY(-3px);
+  border-color: var(--accent-border);
+  box-shadow:
+    0 18px 36px -6px rgba(0, 0, 0, 0.65),
+    0 0 32px 2px var(--accent-glow);
+}
+
+/* Active / Click State (Preps click burst feeling) */
+.bubble-card:active {
+  transform: scale(0.96) translateY(0);
+  transition-duration: 80ms;
+}
+
+/* ================= TRANSITION STATES ================= */
+
+.bubble-positioner.is-bursting {
+  z-index: calc(var(--z-bubbles-hover) + 5);
+}
+
+.bubble-card.is-bursting {
+  transform: scale(0.86);
+  opacity: 0;
+  filter: blur(10px);
+  pointer-events: none;
+  transition:
+    transform 160ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 160ms ease,
+    filter 160ms ease;
+}
+
+.bubble-positioner.is-other-bursting {
+  opacity: 0.15;
+  transform: translate(-50%, -50%) scale(0.92);
+  filter: blur(4px);
+  pointer-events: none;
+  transition:
+    opacity 300ms var(--ease-smooth),
+    transform 300ms var(--ease-smooth),
+    filter 300ms var(--ease-smooth);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble-card {
+    animation: none !important;
+  }
+  .bubble-float-wrapper {
+    animation: none !important;
+  }
+}

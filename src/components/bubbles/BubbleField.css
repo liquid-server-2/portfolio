@@ -1,0 +1,60 @@
+.bubble-field-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: var(--z-bubbles);
+}
+
+/* Desktop Orbital Positioning */
+@media (min-width: 769px) {
+  .bubble-positioner {
+    left: var(--pos-x);
+    top: var(--pos-y);
+  }
+}
+
+/* Mobile Adaptive Organic Flow */
+@media (max-width: 768px) {
+  .bubble-field-container {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 20px;
+    padding: 10px 16px 48px;
+    box-sizing: border-box;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .bubble-positioner {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    order: var(--mobile-order, 1);
+  }
+
+  .bubble-positioner:nth-child(even) {
+    margin-top: 14px;
+  }
+
+  .bubble-positioner:nth-child(odd) {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .bubble-field-container {
+    gap: 12px 14px;
+    padding: 8px 10px 36px;
+  }
+}
