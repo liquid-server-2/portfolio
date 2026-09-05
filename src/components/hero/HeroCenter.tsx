@@ -6,7 +6,7 @@ export const HeroCenter: FC = () => {
     <section className="hero-center-container" aria-label="Introduction">
       <div className="hero-ambient-halo" aria-hidden="true" />
       
-      <h1 className="hero-title">Prakhar</h1>
+      <h1 className="hero-title">Prakhar Jwell Chaturvedi</h1>
 
       <div className="hero-subtitle-container">
         <span className="hero-subtitle-line" aria-hidden="true" />
